@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=”stylesheet” href=”https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css”rel=”nofollow”>
+    <title>Cupcakes</title>
+</head>
+<body>
+    <h1>Cupcake List</h1>
+    <ul>
+        {% for cupcake in cupcakes %}
+            <li>{{cupcake.flavor}} - <button class="delete-cupcake" data-id="{{cupcake.id}}">X</button></li>
+        {% endfor %}
+    </ul>
+
+    <form id="new-cupcake-form">
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            <p>
+                {{ field.label }}
+                {{ field }}
+
+                {% for err in field.errors %}
+                    <span class="error">{{ err }}</span>
+                {% endfor %}
+            </p>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/cupcakes.js"></script>
+    
+</body>
+</html>
